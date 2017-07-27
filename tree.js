@@ -1,18 +1,18 @@
 var list = [];
-function Tree(value, left, right)
+function Node(value, left, right)
 {   
     this.value = value;
     this.Left = left;
     this.Right = right;
 }
-Tree.prototype.AddHead = function(value)
+Node.prototype.AddHead = function(value)
 {
-    var t = new Tree;
+    var t = new Node;
     t.value = value;
     list.push(t);
   
 }
-Tree.prototype.search = function(value)
+Node.prototype.search = function(value)
 {
     var flag = false;
     for (var i = 0; i < list.length; i++) {
@@ -29,9 +29,9 @@ Tree.prototype.search = function(value)
             }
     
 }
-Tree.prototype.AddNode = function(value)
+Node.prototype.AddNode = function(value)
 {
-    var n = new Tree();
+    var n = new Node();
     n.value = value;
     for(var i =0; i<list.length;i++)
         {
@@ -51,7 +51,7 @@ Tree.prototype.AddNode = function(value)
         }
 }
 
-var tree = new Tree();
+var tree = new Node();
 var arr = [1, 2, 3, 4, 5, 6, 7, 8, 9];
 tree.AddHead(1);
 for(var i = 1; i< arr.length; i++)
