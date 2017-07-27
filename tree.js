@@ -1,18 +1,16 @@
-var list = [];
+function Tree()
+{
+		this.head = undefined;
+}
+
 function Node(value, left, right)
 {   
     this.value = value;
     this.Left = left;
     this.Right = right;
 }
-Node.prototype.AddHead = function(value)
-{
-    var t = new Node;
-    t.value = value;
-    list.push(t);
-  
-}
-Node.prototype.search = function(value)
+
+Tree.prototype.search = function(value)
 {
     var flag = false;
     for (var i = 0; i < list.length; i++) {
@@ -29,12 +27,16 @@ Node.prototype.search = function(value)
             }
     
 }
-Node.prototype.AddNode = function(value)
+
+Tree.prototype.AddNode = function(value)
 {
-    var n = new Node();
-    n.value = value;
-    for(var i =0; i<list.length;i++)
-        {
+    var n = new Node(value);
+ 
+	if(this.head === undefined){
+		this.head = n;
+	}
+	else{
+    for(var i =0; i<list.length;i++){
             if(list[i].Left==undefined)
                 {
                     list[i].Left = n.value;
@@ -49,6 +51,7 @@ Node.prototype.AddNode = function(value)
                     break;}
                 }
         }
+		}
 }
 
 var tree = new Node();
