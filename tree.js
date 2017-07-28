@@ -2,7 +2,9 @@ function Tree()
 {
 		this.head = undefined;
 }
-
+function getRandomInt(min, max) {
+  return Math.floor(Math.random() * (max - min+1)) + min;
+}
 function Node(value, left, right)
 {   
     this.value = value;
@@ -10,22 +12,39 @@ function Node(value, left, right)
     this.Right = right;
 }
 
-Tree.prototype.search = function(value)
+Tree.prototype.Search = function(value)
 {
-    var flag = false;
-    for (var i = 0; i < list.length; i++) {
-        if(list[i].value== value)
+   var observableNode= Node();
+   observableNode=this.head;
+   var flag = true;
+   while(flag){
+        if(observableNode.value===value)
             {
-                flag = true;
+                flag=false;
+                alert("Yes");
             }
-        }
-         if(flag){
-             alert("Yes");
-         }   
             else{
-                alert("No");
+                if(observableNode.value<=value)
+                    {
+                        if(observableNode.Left===undefined){
+                            flag =false;
+                            alert("No");
+                            }
+                        else{
+                            observableNode = observableNode.Left;
+                        }
+                    }
+                    else{
+                           if(observableNode.Right===undefined){
+                            flag =false;
+                            alert("No");
+                            }
+                        else{
+                            observableNode = observableNode.Right;
+                        }
+                        }
             }
-    
+            }
 }
 
 Tree.prototype.AddNode = function(value)
@@ -36,30 +55,40 @@ Tree.prototype.AddNode = function(value)
 		this.head = n;
 	}
 	else{
-    for(var i =0; i<list.length;i++){
-            if(list[i].Left==undefined)
-                {
-                    list[i].Left = n.value;
-                    list.push(n);
-                    break;
-                }
+            var flag = true;
+            var observableNode = this.head;
+            while(flag){
+             if(observableNode.value<=value){
+                 if(observableNode.Left===undefined){
+                        observableNode.Left = n;
+                        flag = false;
+                    }
+                    else{
+                        observableNode = observableNode.Left;
+                    }
+             }
                 else{
-                    if(list[i].Right==undefined)
-                        {
-                    list[i].Right = n.value;
-                    list.push(n);
-                    break;}
+                    if(observableNode.Right===undefined){
+                        observableNode.Right = n;
+                        flag = false;
+                    }
+                    else{
+                        observableNode= observableNode.Right;
+                    }
                 }
-        }
+               
+            }
+            
 		}
 }
 
-var tree = new Node();
-var arr = [1, 2, 3, 4, 5, 6, 7, 8, 9];
-tree.AddHead(1);
-for(var i = 1; i< arr.length; i++)
+var tree = new Tree();
+var k = 10;
+for(var i =0; i<k; i++)
     {
-        tree.AddNode(arr[i]);
+        var n = getRandomInt(1,20);
+        tree.AddNode(n);
     }
-tree.search(5);
+var i =0;
+tree.Search(5);
 
