@@ -89,6 +89,5 @@ for(var i =0; i<k; i++)
         var n = getRandomInt(1,20);
         tree.AddNode(n);
     }
-var i =0;
 tree.Search(5);
 
