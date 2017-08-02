@@ -12,23 +12,76 @@ function Node(value, left, right)
     this.Right = right;
 }
 
+Tree.prototype.Delete = function(value)
+{
+   var observableNode = new Node();
+   observableNode = this.head;
+   if(observableNode.value===value){
+       if(observableNode.Left === undefined){
+           if(observableNode.Right ===undefined){
+               this.head=undefined;
+           }
+            else{
+                this.head = observableNode.Right;
+            }
+       }
+        else{
+            if(observableNode.Right ===undefined){
+            this.head = observableNode.Left;
+            this.AddNode(observableNode.Right);
+            }
+
+        }
+
+        }
+    else{
+ for(;;){
+     if(observableNode.value===value){
+            //Сюда вывод
+            break;
+     }
+     else{
+     if(observableNode.value<value){
+         if(observableNode.Left===undefined){
+            break;
+         }
+        else{
+            //Cюда переход влево
+        }
+    }
+        else{
+            if(observableNode.Right===undefined){
+            break;
+         }
+        else{
+            //Cюда переход вправо
+        }
+        }
+
+     }
+
+ }
+}
+}
+
+var Flag = false;
 Tree.prototype.Search = function(value)
 {
-   var observableNode= Node();
+   var observableNode= new Node();
    observableNode=this.head;
    var flag = true;
    while(flag){
         if(observableNode.value===value)
             {
                 flag=false;
-                alert("Yes");
+                Flag = true;
             }
             else{
                 if(observableNode.value<=value)
                     {
                         if(observableNode.Left===undefined){
                             flag =false;
-                            alert("No");
+                            
                             }
                         else{
                             observableNode = observableNode.Left;
@@ -37,7 +90,7 @@ Tree.prototype.Search = function(value)
                     else{
                            if(observableNode.Right===undefined){
                             flag =false;
-                            alert("No");
+                            
                             }
                         else{
                             observableNode = observableNode.Right;
@@ -47,20 +100,18 @@ Tree.prototype.Search = function(value)
             }
 }
 
-Tree.prototype.AddNode = function(value)
+Tree.prototype.AddNode = function(node)
 {
-    var n = new Node(value);
- 
-	if(this.head === undefined){
-		this.head = n;
+    if(this.head === undefined){
+		this.head = node;
 	}
 	else{
             var flag = true;
-            var observableNode = this.head;
+            var observableNode =  this.head;
             while(flag){
-             if(observableNode.value<=value){
+             if(observableNode.value<=node.value){
                  if(observableNode.Left===undefined){
-                        observableNode.Left = n;
+                        observableNode.Left = node;
                         flag = false;
                     }
                     else{
@@ -69,7 +120,7 @@ Tree.prototype.AddNode = function(value)
              }
                 else{
                     if(observableNode.Right===undefined){
-                        observableNode.Right = n;
+                        observableNode.Right = node;
                         flag = false;
                     }
                     else{
@@ -87,7 +138,14 @@ var k = 10;
 for(var i =0; i<k; i++)
     {
         var n = getRandomInt(1,20);
-        tree.AddNode(n);
+        var nod = new Node(n)
+        tree.AddNode(nod);
     }
-tree.Search(5);
+    var n = new Node();
+    n.value=5;
+    tree.AddNode(n);
+
+//tree.Search(5);
+//tree.Delete(5);
+//tree.Search(5);
 

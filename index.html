@@ -8,7 +8,26 @@
 </head> 
 
 <body> 
-
-</body> 
+  <button id="Add">AddNode</button> <input autofocus required type="text" id="fname" value="Enter value"><br>
+  <button id="Search" onclick="alert('Click!')">Search</button>
+  <input id="wind" value="Answer..."></input>
+</body>
+<script>
+        Add.onclick = function(){
+        var n = new Node();
+        n.value = fname.value;
+        tree.AddNode(n);
+    }
+        Search.onclick = function(){
+            tree.Search(fname.value);
+            if(Flag){
+                wind.value="Yes";
+            }
+            else{
+                wind.value = "No";
+            }
+            
+        }
+</script>
 
 </html>
