@@ -28,10 +28,7 @@
     var output = document.getElementById('output');
 
     document.getElementById('addNode').onclick = function () {
-        var n = new Node();
-        n.value = input.value;
-        tree.AddNode(n);
-
+        tree.AddNode(input.value);
         output.value = JSON.stringify(tree, null, 4);
     };
 
