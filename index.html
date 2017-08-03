@@ -1,33 +1,50 @@
-<!DOCTYPE html> 
-<html> 
+<!DOCTYPE html>
+<html>
 
-<head> 
-<meta charset="utf-8"> 
-<title>Tree</title> 
-<script type="text/javascript" src="tree.js"></script> 
-</head> 
+<head>
+    <meta charset="utf-8">
+    <title>Tree</title>
+    <script type="text/javascript" src="tree.js"></script>
+    <script type="text/javascript" src="test.js"></script>
+</head>
 
-<body> 
-  <button id="Add">AddNode</button> <input autofocus required type="text" id="fname" value="Enter value"><br>
-  <button id="Search" onclick="alert('Click!')">Search</button>
-  <input id="wind" value="Answer..."></input>
+<body>
+    <div>
+        <input autofocus required type="text" id="nodeValue" placeholder="Enter node value">
+    </div>
+    <div>
+        <button id="addNode">AddNode</button> <br>
+        <button id="contains">Contains</button>
+    </div>
+    <div>
+        <textarea id="output" placeholder="Tree will be here..." style="width:100%;height:500px;"></textarea>
+    </div>
+
 </body>
 <script>
-        Add.onclick = function(){
+    var tree = new Tree();
+
+    var input = document.getElementById('nodeValue');
+    var output = document.getElementById('output');
+
+    document.getElementById('addNode').onclick = function () {
         var n = new Node();
-        n.value = fname.value;
+        n.value = input.value;
         tree.AddNode(n);
-    }
-        Search.onclick = function(){
-            tree.Search(fname.value);
-            if(Flag){
-                wind.value="Yes";
-            }
-            else{
-                wind.value = "No";
-            }
-            
+
+        output.value = JSON.stringify(tree, null, 4);
+    };
+
+    document.getElementById('contains').onclick = function () {
+        tree.Search(input.value);
+        if (Flag) {
+            output.value = "Yes";
         }
+        else {
+            output.value = "No";
+        }
+    };
+
 </script>
 
 </html>
