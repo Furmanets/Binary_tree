@@ -1,47 +1,7 @@
 function Tree() {
-    var head = undefined;
+    this.head = undefined;
 
-    this.AddNode = function (value) {
-        var node = new Node(value);
-
-        if (head === undefined) {
-            head = node;
-        }
-        else {
-            var flag = true;
-            var observableNode = head;
-            while (flag) {
-                if (observableNode.value <= node.value) {
-                    if (observableNode.Left === undefined) {
-                        observableNode.Left = node;
-                        flag = false;
-                    }
-                    else {
-                        observableNode = observableNode.Left;
-                    }
-                }
-                else {
-                    if (observableNode.Right === undefined) {
-                        observableNode.Right = node;
-                        flag = false;
-                    }
-                    else {
-                        observableNode = observableNode.Right;
-                    }
-                }
-
-            }
-
-        }
-    }
-
-    function Node(value, left, right) {
-        this.value = value;
-        this.Left = left;
-        this.Right = right;
-    }
-
-    Tree.prototype.Delete = function (value) {
+    this.Delete = function (value) {
         var observableNode = new Node();
         observableNode = head;
         if (observableNode.value === value) {
@@ -92,20 +52,20 @@ function Tree() {
         }
     }
 
-    var Flag = false;
-    Tree.prototype.Search = function (value) {
+    this.Search = function (value) {
         var observableNode = new Node();
-        observableNode = head;
+        observableNode = this.head;
         var flag = true;
         while (flag) {
             if (observableNode.value === value) {
                 flag = false;
-                Flag = true;
+                return true;
             }
             else {
-                if (observableNode.value <= value) {
+                if (observableNode.value > value) {
                     if (observableNode.Left === undefined) {
                         flag = false;
+                        return false;
 
                     }
                     else {
@@ -115,6 +75,7 @@ function Tree() {
                 else {
                     if (observableNode.Right === undefined) {
                         flag = false;
+                        return false;
 
                     }
                     else {
@@ -123,5 +84,45 @@ function Tree() {
                 }
             }
         }
+    }
+
+    this.AddNode = function (value) {
+        var node = new Node(value);
+
+        if (this.head === undefined) {
+            this.head = node;
+        }
+        else {
+            var flag = true;
+            var observableNode = this.head;
+            while (flag) {
+                if (observableNode.value >= node.value) {
+                    if (observableNode.Left === undefined) {
+                        observableNode.Left = node;
+                        flag = false;
+                    }
+                    else {
+                        observableNode = observableNode.Left;
+                    }
+                }
+                else {
+                    if (observableNode.Right === undefined) {
+                        observableNode.Right = node;
+                        flag = false;
+                    }
+                    else {
+                        observableNode = observableNode.Right;
+                    }
+                }
+
+            }
+
+        }
+    }
+
+    function Node(value, left, right) {
+        this.value = value;
+        this.Left = left;
+        this.Right = right;
     }
 }
